@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Línea de Tiempo Maestra - Sebastián Muñoz</title>
+<title>Línea de Tiempo Maestra Detallada - Sebastián Muñoz</title>
 <style>
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; line-height: 1.6; }
-    h1 { text-align: center; color: #38bdf8; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-    .subtitle { text-align: center; color: #94a3b8; margin-bottom: 40px; }
+    h1 { text-align: center; color: #38bdf8; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
+    .subtitle { text-align: center; color: #94a3b8; margin-bottom: 40px; font-size: 0.9rem; }
     .timeline { position: relative; max-width: 1200px; margin: auto; padding: 40px 0; }
     .timeline::after { content: ''; position: absolute; width: 4px; background: linear-gradient(to bottom, #38bdf8, #1e293b); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
     .container { padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box; }
@@ -15,159 +15,195 @@
     .right { left: 50%; }
     .container::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background: #38bdf8; border: 4px solid #0f172a; top: 30px; border-radius: 50%; z-index: 1; }
     .right::after { left: -10px; }
-    .content { padding: 25px; background: #1e293b; border-radius: 12px; border-left: 5px solid #38bdf8; transition: transform 0.3s ease; }
-    .right .content { border-left: none; border-right: 5px solid #38bdf8; }
-    .date { font-weight: bold; color: #38bdf8; font-size: 1.1rem; margin-bottom: 12px; display: block; }
-    .section { margin-top: 15px; padding-top: 10px; border-top: 1px solid #334155; }
-    .section span { color: #f87171; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; }
-    .metrics { display: flex; gap: 15px; margin-top: 10px; font-size: 0.9rem; color: #fbbf24; }
-    .metric-item { background: #0f172a; padding: 5px 10px; border-radius: 5px; }
-    .mental-state { font-style: italic; color: #10b981; margin-top: 10px; font-size: 0.9rem; }
+    .content { padding: 20px; background: #1e293b; border-radius: 12px; border-top: 4px solid #38bdf8; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .date { font-weight: bold; color: #38bdf8; font-size: 1rem; margin-bottom: 8px; display: block; }
+    .tag { display: inline-block; background: #334155; color: #38bdf8; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+    .section { margin-top: 12px; padding-top: 8px; border-top: 1px solid #334155; }
+    .section b { color: #f87171; font-size: 0.8rem; text-transform: uppercase; display: block; margin-bottom: 4px; }
+    .metrics { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+    .metric-item { background: #0f172a; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; color: #fbbf24; border: 1px solid #1e293b; }
+    .psych { font-style: italic; color: #10b981; font-size: 0.85rem; margin-top: 8px; padding: 5px; background: rgba(16, 185, 129, 0.1); border-radius: 4px; }
     @media (max-width: 768px) {
         .timeline::after { left: 31px; }
-        .container { width: 100%; padding-left: 70px; padding-right: 25px; }
+        .container { width: 100%; padding-left: 70px; padding-right: 25px; left: 0 !important; }
         .container::after { left: 21px; }
-        .right { left: 0; }
-        .right .content { border-left: 5px solid #38bdf8; border-right: none; }
+        .right::after { left: 21px; }
     }
 </style>
 </head>
 <body>
 
-<h1>📍 Mapa Cronológico Integral</h1>
-<p class="subtitle">Análisis de Trayectoria: 2024 - 2026</p>
+<h1>📍 MAPA CRONOLÓGICO INTEGRAL DETALLADO</h1>
+<p class="subtitle">Análisis de Trayectoria Económica y Emocional: 2024 - 2026</p>
 
 <div class="timeline">
 
     <div class="container left">
         <div class="content">
-            <span class="date">14 ENERO 2024 — EL DETONANTE</span>
-            [span_0](start_span)<p>Choque con daño a tercero que genera deuda directa[span_0](end_span). [span_1](start_span)Impacto de responsabilidad elevada y urgencia económica inmediata[span_1](end_span).</p>
+            <span class="tag">El Detonante Moral</span>
+            <span class="date">14 ENERO 2024</span>
+            [span_2](start_span)<p><b>Evento:</b> Choque con daño a tercero[span_2](end_span).</p>
             <div class="section">
-                <span>ESTADO MENTAL:</span><br>Claridad, enfoque y motivación inicial por resolver la situación.
+                [span_3](start_span)<b>Impacto:</b> Se genera una deuda directa y una carga psicológica inmediata: sentido de responsabilidad elevado y urgencia por generar dinero[span_3](end_span).
             </div>
+            [span_4](start_span)<div class="psych">Estado: Enfoque absoluto en la resolución económica[span_4](end_span).</div>
         </div>
     </div>
 
     <div class="container right">
         <div class="content">
+            <span class="tag">Activación Operativa</span>
             <span class="date">ENERO 2024 (POST-CHOQUE)</span>
-            [span_2](start_span)<p>Inicio de generación intensa de capital[span_2](end_span). [span_3](start_span)Manejo de flujos iniciales a través de cuenta de tercero/expareja[span_3](end_span).</p>
+            [span_5](start_span)<p>Inicio de generación intensa de capital a través de la expareja (Astrid Mouchet Agurto)[span_5](end_span).</p>
             <div class="metrics">
                 <div class="metric-item">💰 Capital: $1.1M</div>
                 <div class="metric-item">📊 Flujo: $3M - $5M</div>
             </div>
             <div class="section">
-                [span_4](start_span)<span>CONSECUENCIA:</span><br>Dependencia de gestión y transparencia ajena sin comprobantes claros[span_4](end_span).
+                [span_6](start_span)<b>Problema Estructural:</b> El dinero no está bajo tu control directo; dependencia total de la gestión y palabra de terceros sin comprobantes claros[span_6](end_span).
             </div>
+            [span_7](start_span)<div class="psych">Estado: Claridad mental y motivación alineada[span_7](end_span).</div>
         </div>
     </div>
 
     <div class="container left">
         <div class="content">
-            <span class="date">FEBRERO 2024 — APOYO Y ESCALAMIENTO</span>
-            <p>Inyección de capital por parte de la madre. Aumento de confianza y proyección de resultados.</p>
+            <span class="tag">Escalamiento Progresivo</span>
+            <span class="date">FEBRERO 2024</span>
+            [span_8](start_span)<p><b>Hito:</b> Apoyo de madre para aumentar capital[span_8](end_span).</p>
             <div class="metrics">
-                <div class="metric-item">📈 Escalamiento: Apuestas hasta $700K+</div>
+                <div class="metric-item">🚀 Escalamiento: 100K→784K</div>
+                <div class="metric-item">🎲 Apuestas: $700K+</div>
                 <div class="metric-item">📊 Flujo: $6M - $10M</div>
             </div>
+            [span_9](start_span)<div class="psych">Estado: Confianza creciente y proyección de éxito[span_9](end_span).</div>
         </div>
     </div>
 
     <div class="container right">
         <div class="content">
-            <span class="date">MARZO – MAYO 2024 — OPERACIÓN INTENSIVA</span>
-            <p>Entrada a montos millonarios. Mayo alcanza el pico de exposición con flujos de hasta $60M.</p>
+            <span class="tag">Máxima Exposición</span>
+            <span class="date">MARZO – MAYO 2024</span>
+            [span_10](start_span)<p>Operación intensiva con montos millonarios y alta volatilidad[span_10](end_span).</p>
             <div class="metrics">
                 <div class="metric-item">💸 Apostado: $35M - $50M</div>
                 <div class="metric-item">🔄 Flujo: $40M - $60M</div>
             </div>
             <div class="section">
-                <span>ESTADO MENTAL:</span><br>Presión creciente; la meta se percibe lejana a pesar del alto volumen.
+                [span_11](start_span)<b>Causalidad:</b> A pesar del flujo, la meta se percibe lejana, generando una presión acumulativa y necesidad de acelerar[span_11](end_span).
             </div>
         </div>
     </div>
 
     <div class="container left">
         <div class="content">
-            <span class="date">JUNIO 2024 — EL CRÉDITO</span>
-            <p>Solicitud de crédito bancario para acelerar resultados. Cambio de paradigma: de generar a deber responder por capital ajeno.</p>
+            <span class="tag">Riesgo Externo</span>
+            <span class="date">JUNIO 2024</span>
+            [span_12](start_span)<p><b>Decisión:</b> Solicitud de crédito bancario para inyectar capital[span_12](end_span).</p>
             <div class="section">
-                <span>IMPACTO:</span><br>Aumento crítico de la presión financiera y carga emocional.
+                <b>Efecto:</b> Cambio de paradigma; pasas de operar capital propio a deber responder por deuda financiera externa. [span_13](start_span)Mayor carga emocional[span_13](end_span).
             </div>
         </div>
     </div>
 
     <div class="container right">
         <div class="content">
-            <span class="date">AGOSTO – SEPTIEMBRE 2024 — CAMBIO DE FOCO</span>
-            [span_5](start_span)<p>Inicio de relación sentimental[span_5](end_span). [span_6](start_span)Pausa parcial en la generación de ingresos para priorizar lo emocional[span_6](end_span).</p>
-            <div class="mental-state">Reducción momentánea de la presión económica percibida.</div>
+            <span class="tag">Giro de Prioridades</span>
+            <span class="date">AGOSTO – SEPTIEMBRE 2024</span>
+            <p>Inicio de relación afectiva. [span_14](start_span)El foco se desplaza de lo económico a lo emocional[span_14](end_span).</p>
+            <div class="section">
+                [span_15](start_span)<b>Impacto Financiero:</b> Pausa en la generación de ingresos, lo que reduce la presión momentánea pero agrava la brecha financiera futura[span_15](end_span).
+            </div>
         </div>
     </div>
 
     <div class="container left">
         <div class="content">
-            <span class="date">OCTUBRE 2024 — DESESTRUCTURACIÓN</span>
-            <p>Abandono temporal de estudios universitarios. Pérdida de estructura diaria y aumento de presión externa (deuda tía + deuda choque).</p>
+            <span class="tag">Pérdida de Estructura</span>
+            <span class="date">OCTUBRE 2024</span>
+            <p><b>Hitos:</b> Abandono de estudios universitarios. [span_16](start_span)El entorno social percibe capacidad económica y genera actitudes negativas[span_16](end_span).</p>
             <div class="section">
-                <span>ESTADO MENTAL:</span><br>Sobreexigencia y pérdida de paz mental debido a la percepción del entorno.
+                <b>Presión Acumulada:</b> Se suma deuda con una tía a la deuda del choque original. [span_17](start_span)Estado de sobreexigencia[span_17](end_span).
             </div>
+            [span_18](start_span)<div class="psych">Estado: Pérdida de tranquilidad mental[span_18](end_span).</div>
         </div>
     </div>
 
     <div class="container right">
         <div class="content">
-            <span class="date">FINES OCTUBRE 2024 — INESTABILIDAD</span>
-            <p>Evento con expareja y tercera persona. La impulsividad comienza a dominar la toma de decisiones.</p>
+            <span class="tag">Inestabilidad Emocional</span>
+            <span class="date">FINES OCTUBRE 2024</span>
+            <p>Evento traumático con expareja y tercera persona. [span_19](start_span)Aparece la inseguridad y la pérdida de claridad operativa[span_19](end_span).</p>
+            [span_20](start_span)<div class="psych">Estado: Decisiones impulsivas y reacciones emocionales[span_20](end_span).</div>
         </div>
     </div>
 
     <div class="container left">
         <div class="content">
-            <span class="date">NOVIEMBRE 2024 — EL COLAPSO OPERATIVO</span>
-            <p>Generación de $12M. [span_7](start_span)Retención de $6M sin devolución clara[span_7](end_span). Posible paternidad aumenta la carga de responsabilidad.</p>
-            <div class="section">
-                [span_8](start_span)<span>CONFLICTO:</span><br>Expareja se cobra con objetos personales y regalos de forma unilateral[span_8](end_span).
-            </div>
+            <span class="tag">El Colapso de Confianza</span>
+            <span class="date">NOVIEMBRE 2024</span>
+            <p>Retiro del auto por familia. Distanciamiento de la relación. [span_21](start_span)Posible paternidad aumenta la presión al máximo[span_21](end_span).</p>
             <div class="metrics">
-                <div class="metric-item">❌ Retenido: $6M</div>
-                <div class="metric-item">📉 Pérdida x Impulsividad: $6M</div>
+                <div class="metric-item">💰 Generado: $12M</div>
+                <div class="metric-item">📥 Retirado: $6M</div>
+                <div class="metric-item">❌ Retenido: $6M (Sin devolución)</div>
             </div>
-        </div>
-    </div>
-
-    <div class="container right">
-        <div class="content">
-            <span class="date">DICIEMBRE 2024 — SATURACIÓN</span>
-            <p>Pérdida adicional de $2.1M (motos). Ruptura definitiva y conflictos familiares visibles.</p>
-            <div class="mental-state">Saturación mental total y desborde emocional.</div>
-        </div>
-    </div>
-
-    <div class="container left">
-        <div class="content">
-            <span class="date">02 ENERO 2025 — PUNTO DE QUIEBRE</span>
-            <p>Intento de suicidio e internación clínica durante ~5 meses. Resultado de la acumulación de factores financieros, emocionales y familiares.</p>
-        </div>
-    </div>
-
-    <div class="container right">
-        <div class="content">
-            <span class="date">SEPTIEMBRE 2025 — REAPARICIÓN DE CAPACIDAD</span>
-            <p>Demostración de habilidad técnica intacta tras la recuperación.</p>
-            <div class="metrics">
-                <div class="metric-item">💰 Generación: $15M+ (Corto plazo)</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container left">
-        <div class="content">
-            <span class="date">AÑO 2026 — DESAFÍO ACTUAL</span>
-            <p>Implementación de nuevos sistemas sin resultados esperados. Falta de enfoque y estrategias no validadas.</p>
             <div class="section">
-                [span_9](start_span)<span>SITUACIÓN FINAL:</span><br>Doble pérdida económica + desgaste emocional acumulado[span_9](end_span).
+                <b>Conflicto Astrid:</b> Cobro unilateral de ella mediante objetos entregados/regalos. [span_22](start_span)Incumplimiento del intercambio pactado[span_22](end_span).
+            </div>
+        </div>
+    </div>
+
+    <div class="container right">
+        <div class="content">
+            <span class="tag">Pérdida Crítica</span>
+            <span class="date">FINES NOVIEMBRE 2024</span>
+            [span_23](start_span)<p><b>Evento:</b> Pérdida de los $6.000.000 restantes en un intento impulsivo de recuperación bajo presión extrema[span_23](end_span).</p>
+            [span_24](start_span)<div class="psych">Estado: Desesperación total y desborde emocional[span_24](end_span).</div>
+        </div>
+    </div>
+
+    <div class="container left">
+        <div class="content">
+            <span class="tag">Implosión Familiar</span>
+            <span class="date">DICIEMBRE 2024</span>
+            <p>Ruptura definitiva. Pérdida adicional de $2.1M asociada a motos. [span_25](start_span)Conflictos familiares visibles para la madre[span_25](end_span).</p>
+            [span_26](start_span)<div class="psych">Estado: Saturación mental y colapso financiero/familiar[span_26](end_span).</div>
+        </div>
+    </div>
+
+    <div class="container right">
+        <div class="content">
+            <span class="tag">Crisis de Salud</span>
+            <span class="date">2 ENERO 2025</span>
+            [span_27](start_span)<p><b>Hito:</b> Intento de suicidio e internación clínica posterior de aproximadamente 5 meses[span_27](end_span).</p>
+            <div class="section">
+                [span_28](start_span)<b>Análisis:</b> Resultado de la acumulación sostenida de presiones sin mecanismos de regulación[span_28](end_span).
+            </div>
+        </div>
+    </div>
+
+    <div class="container left">
+        <div class="content">
+            <span class="tag">Resiliencia Técnica</span>
+            <span class="date">SEPTIEMBRE 2025</span>
+            [span_29](start_span)<p><b>Logro:</b> Demostración de capacidad intacta tras la recuperación[span_29](end_span).</p>
+            <div class="metrics">
+                <div class="metric-item">💰 Generación: >$15M en corto plazo</div>
+            </div>
+            <div class="section">
+                [span_30](start_span)<b>Nota:</b> Desorden posterior y conflictos en viajes generan nuevas mermas hacia finales de año[span_30](end_span).
+            </div>
+        </div>
+    </div>
+
+    <div class="container right">
+        <div class="content">
+            <span class="tag">Situación Actual</span>
+            <span class="date">AÑO 2026</span>
+            [span_31](start_span)<p>Implementación de nuevos sistemas operativos que no logran los resultados esperados[span_31](end_span).</p>
+            <div class="section">
+                <b>Estado:</b> Falta de enfoque y estrategias no validadas. [span_32](start_span)Doble pérdida económica y desgaste emocional residual[span_32](end_span).
             </div>
         </div>
     </div>
@@ -175,5 +211,4 @@
 </div>
 
 </body>
-  </html>
-
+</html>
