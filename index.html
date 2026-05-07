@@ -3,41 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Línea de Tiempo Integral - Sebastián Muñoz</title>
+    <title>Línea de Tiempo Interactiva - Gestión Integral</title>
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #38bdf8;
+            --text: #e2e8f0;
+            --danger: #f87171;
+            --accent: #fbbf24;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f172a;
-            color: #e2e8f0;
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg-color);
+            color: var(--text);
             margin: 0;
             padding: 20px;
-            line-height: 1.6;
         }
 
-        h1 {
-            text-align: center;
-            color: #38bdf8;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        h1 { text-align: center; color: var(--primary); text-transform: uppercase; }
+
+        /* Formulario de entrada */
+        .admin-controls {
+            max-width: 800px;
+            margin: 20px auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--primary);
         }
 
+        .admin-controls input, .admin-controls textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-add { background: var(--primary); color: #0f172a; }
+        .btn-edit { background: var(--accent); color: #0f172a; margin-right: 5px; }
+        .btn-delete { background: var(--danger); color: white; }
+
+        /* Estructura Línea de Tiempo */
         .timeline {
             position: relative;
             max-width: 1000px;
-            margin: auto;
-            padding: 40px 0;
+            margin: 40px auto;
         }
 
-        /* Línea central */
         .timeline::after {
             content: '';
             position: absolute;
             width: 4px;
-            background: #38bdf8;
-            top: 0;
-            bottom: 0;
-            left: 50%;
+            background: var(--primary);
+            top: 0; bottom: 0; left: 50%;
             margin-left: -2px;
         }
 
@@ -48,176 +80,116 @@
             box-sizing: border-box;
         }
 
-        .left { left: 0; }
-        .right { left: 50%; }
-
-        /* Círculos en la línea */
-        .container::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            background: #38bdf8;
-            border: 3px solid #0f172a;
-            top: 30px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .right::after { left: -10px; }
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; text-align: left; }
 
         .content {
             padding: 20px;
-            background: #1e293b;
+            background: var(--card-bg);
             border-radius: 12px;
-            border-top: 4px solid #38bdf8;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-top: 4px solid var(--primary);
+            position: relative;
         }
 
-        .date {
-            font-weight: bold;
-            color: #38bdf8;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            display: block;
-        }
+        .date-display { font-weight: bold; color: var(--primary); font-size: 1.1rem; }
+        .text-display { margin: 10px 0; display: block; }
 
-        .section {
-            margin-top: 12px;
-            padding-top: 8px;
-            border-top: 1px solid #334155;
-        }
-
-        .section b {
-            color: #f87171;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .metrics {
-            display: flex;
-            gap: 10px;
-            margin: 10px 0;
-            font-size: 0.85rem;
-        }
-
-        .metric-item {
-            background: #0f172a;
-            padding: 4px 8px;
-            border-radius: 4px;
-            color: #fbbf24;
-            border: 1px solid #334155;
-        }
+        .actions { margin-top: 15px; }
 
         @media (max-width: 768px) {
             .timeline::after { left: 31px; }
-            .container { width: 100%; padding-left: 70px; padding-right: 25px; left: 0 !important; }
-            .container::after { left: 21px; }
-            .right::after { left: 21px; }
+            .container { width: 100%; padding-left: 70px; text-align: left !important; }
+            .right { left: 0; }
         }
     </style>
 </head>
 <body>
 
-    <h1>📍 Línea de Tiempo Integral del Caso</h1>
+    <h1>📍 Gestión de Línea de Tiempo Integral</h1>
 
-    <div class="timeline">
-
-        <div class="container left">
-            <div class="content">
-                <span class="date">14 Enero 2024 — El Detonante</span>
-                <div class="section">
-                    <b>Hecho:</b>
-                    [span_1](start_span)Accidente vehicular que genera una deuda directa con un tercero[span_1](end_span).
-                </div>
-                <div class="section">
-                    <b>Impacto:</b>
-                    [span_2](start_span)Generación de una responsabilidad financiera completa y urgencia económica inmediata[span_2](end_span).
-                </div>
-            </div>
-        </div>
-
-        <div class="container right">
-            <div class="content">
-                <span class="date">Enero 2024 (Post-Choque)</span>
-                <div class="section">
-                    <b>Operativo:</b>
-                    Inicio de generación intensa de capital. [span_3](start_span)El manejo de flujos se realiza a través de la cuenta de la expareja[span_3](end_span).
-                </div>
-                <div class="metrics">
-                    <div class="metric-item">💰 Capital: $1.1M</div>
-                    <div class="metric-item">📊 Flujo: $3M - $5M</div>
-                </div>
-                <div class="section">
-                    <b>Consecuencia:</b>
-                    [span_4](start_span)Dependencia total de gestión y transparencia ajena sin comprobantes claros[span_4](end_span).
-                </div>
-            </div>
-        </div>
-
-        <div class="container left">
-            <div class="content">
-                <span class="date">Febrero 2024 — Escalamiento</span>
-                <div class="section">
-                    <b>Hito:</b>
-                    Inyección de capital por parte de la madre. Aumento de confianza y escalamiento de apuestas.
-                </div>
-                <div class="metrics">
-                    <div class="metric-item">🚀 Apuestas: hasta $700K</div>
-                    <div class="metric-item">📈 Flujo: $6M - $10M</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container right">
-            <div class="content">
-                <span class="date">Marzo – Mayo 2024 — Operación Intensiva</span>
-                <div class="section">
-                    <b>Contexto:</b>
-                    Entrada a montos millonarios. Mayo alcanza el pico de exposición con flujos de hasta $60M.
-                </div>
-                <div class="metrics">
-                    <div class="metric-item">💸 Apostado: $35M - $50M</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container left">
-            <div class="content">
-                <span class="date">Noviembre 2024 — Quiebre de Confianza</span>
-                <div class="section">
-                    <b>Hecho:</b>
-                    Distanciamiento de la relación por estudios y presencia de terceros. [span_5](start_span)Debilitamiento total del vínculo[span_5](end_span).
-                </div>
-                <div class="section">
-                    <b>Financiero:</b>
-                    [span_6](start_span)Confirmación de dinero retenido ascendiente a $6.000.000 sin devolución clara[span_6](end_span).
-                </div>
-            </div>
-        </div>
-
-        <div class="container right">
-            <div class="content">
-                <span class="date">Conflicto y Situación Actual</span>
-                <div class="section">
-                    <b>Hecho:</b>
-                    [span_7](start_span)La expareja decide cobrarse unilateralmente con objetos que eran regalos o apoyo[span_7](end_span).
-                </div>
-                <div class="section">
-                    <b>Incumplimiento:</b>
-                    [span_8](start_span)El objeto pactado en intercambio nunca es devuelto, resultando en una pérdida directa del bien[span_8](end_span).
-                </div>
-                <div class="section">
-                    <b>Resultado Final:</b>
-                    [span_9](start_span)Doble pérdida económica y desgaste emocional severo[span_9](end_span).
-                </div>
-            </div>
-        </div>
-
+    <div class="admin-controls">
+        <h3>Agregar Nuevo Evento</h3>
+        <input type="text" id="eventDate" placeholder="Fecha (ej: 14 Enero 2024)">
+        <input type="text" id="eventTitle" placeholder="Título del Evento">
+        <textarea id="eventDesc" rows="3" placeholder="Descripción detallada, causas y consecuencias"></textarea>
+        <button class="btn btn-add" onclick="addEvent()">Agregar a la Cronología</button>
     </div>
 
+    <div class="timeline" id="timelineContainer">
+        </div>
+
+    <script>
+        [span_2](start_span)[span_3](start_span)[span_4](start_span)// Datos iniciales basados en el caso[span_2](end_span)[span_3](end_span)[span_4](end_span)
+        let events = [
+            { id: 1, date: "14 Enero 2024", title: "El Detonante", desc: "Choque vehicular que genera deuda con tercero e impacto de responsabilidad inmediata." },
+            { id: 2, date: "Enero 2024 (Post)", title: "Estructura de Riesgo", desc: "Inicio de flujos a través de cuenta de terceros sin comprobantes claros." },
+            { id: 3, date: "Noviembre 2024", title: "Retención de Capital", desc: "Confirmación de $6.000.000 retenidos y quiebre de confianza." }
+        ];
+
+        function renderTimeline() {
+            const container = document.getElementById('timelineContainer');
+            container.innerHTML = '';
+
+            events.forEach((event, index) => {
+                const side = index % 2 === 0 ? 'left' : 'right';
+                const html = `
+                    <div class="container ${side}" id="event-${event.id}">
+                        <div class="content">
+                            <span class="date-display">${event.date}</span>
+                            <h4 style="margin:5px 0; color:var(--accent)">${event.title}</h4>
+                            <span class="text-display">${event.desc}</span>
+                            <div class="actions">
+                                <button class="btn btn-edit" onclick="editEvent(${event.id})">Editar</button>
+                                <button class="btn btn-delete" onclick="deleteEvent(${event.id})">Borrar</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function addEvent() {
+            const date = document.getElementById('eventDate').value;
+            const title = document.getElementById('eventTitle').value;
+            const desc = document.getElementById('eventDesc').value;
+
+            if(date && title && desc) {
+                const newEvent = {
+                    id: Date.now(),
+                    date,
+                    title,
+                    desc
+                };
+                events.push(newEvent);
+                renderTimeline();
+                // Limpiar campos
+                document.getElementById('eventDate').value = '';
+                document.getElementById('eventTitle').value = '';
+                document.getElementById('eventDesc').value = '';
+            } else {
+                alert("Por favor completa todos los campos.");
+            }
+        }
+
+        function deleteEvent(id) {
+            if(confirm("¿Estás seguro de borrar este hito?")) {
+                events = events.filter(e => e.id !== id);
+                renderTimeline();
+            }
+        }
+
+        function editEvent(id) {
+            const event = events.find(e => e.id === id);
+            const newDesc = prompt("Editar descripción:", event.desc);
+            if(newDesc !== null) {
+                event.desc = newDesc;
+                renderTimeline();
+            }
+        }
+
+        // Carga inicial
+        renderTimeline();
+    </script>
 </body>
 </html>
