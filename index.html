@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Línea de Tiempo Interactiva - Sebastián Muñoz</title>
+    <title>Sistema de Gestión Cronológica - Persistente</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -25,8 +25,8 @@
         }
 
         h1 { text-align: center; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        .instructions { text-align: center; color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px; }
 
-        /* Formulario de entrada */
         .admin-controls {
             max-width: 900px;
             margin: 20px auto;
@@ -37,8 +37,6 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
         }
 
-        .admin-controls h3 { margin-top: 0; color: var(--primary); }
-
         .admin-controls input, .admin-controls textarea {
             width: 100%;
             padding: 12px;
@@ -48,131 +46,92 @@
             background: #0f172a;
             color: white;
             box-sizing: border-box;
-            font-size: 1rem;
         }
 
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn-add { background: var(--primary); color: #0f172a; width: 100%; margin-top: 10px; }
-        .btn-add:hover { background: #7dd3fc; }
+        .btn { padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-add { background: var(--primary); color: #0f172a; width: 100%; }
         .btn-edit { background: var(--accent); color: #0f172a; margin-right: 5px; }
         .btn-delete { background: var(--danger); color: white; }
 
-        /* Estructura Línea de Tiempo */
-        .timeline {
-            position: relative;
-            max-width: 1100px;
-            margin: 50px auto;
-        }
+        .timeline { position: relative; max-width: 1100px; margin: 50px auto; }
+        .timeline::after { content: ''; position: absolute; width: 4px; background: var(--primary); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
 
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background: var(--primary);
-            top: 0; bottom: 0; left: 50%;
-            margin-left: -2px;
-        }
-
-        .container {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-        }
-
-        .left { left: 0; }
-        .right { left: 50%; }
+        .container { padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box; }
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; text-align: left; }
 
         .container::after {
-            content: '';
-            position: absolute;
-            width: 24px; height: 24px;
-            right: -12px; background: var(--primary);
-            border: 4px solid var(--bg-color);
+            content: ''; position: absolute; width: 20px; height: 20px;
+            right: -10px; background: var(--primary); border: 4px solid var(--bg-color);
             top: 30px; border-radius: 50%; z-index: 1;
         }
+        .right::after { left: -10px; }
 
-        .right::after { left: -12px; }
-
-        .content {
-            padding: 25px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            border-top: 5px solid var(--primary);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-        }
-
-        .date-display { font-weight: bold; color: var(--primary); font-size: 1.1rem; display: block; margin-bottom: 10px; }
-        .text-display { font-size: 0.95rem; color: #cbd5e1; }
-        .actions { margin-top: 20px; border-top: 1px solid #334155; padding-top: 15px; }
+        .content { padding: 25px; background: var(--card-bg); border-radius: 12px; border-top: 5px solid var(--primary); }
+        .date-display { font-weight: bold; color: var(--primary); font-size: 1.1rem; display: block; }
+        .text-display { font-size: 0.95rem; color: #cbd5e1; margin-top: 10px; white-space: pre-wrap; }
+        
+        .actions { margin-top: 15px; border-top: 1px solid #334155; padding-top: 10px; }
 
         @media (max-width: 768px) {
             .timeline::after { left: 31px; }
-            .container { width: 100%; padding-left: 70px; padding-right: 25px; left: 0 !important; }
-            .container::after { left: 19px; }
-            .right::after { left: 19px; }
+            .container { width: 100%; padding-left: 70px; text-align: left !important; }
+            .container::after { left: 21px; }
         }
     </style>
 </head>
 <body>
 
-    <h1>📍 Gestión Integral de Trayectoria</h1>
+    <h1>📍 Gestión Integral Persistente</h1>
+    <p class="instructions">Los cambios se guardan automáticamente en este navegador.</p>
 
     <div class="admin-controls">
-        <h3>Agregar Nuevo Hito Analítico</h3>
         <input type="text" id="eventDate" placeholder="Mes y Año (ej: Junio 2024)">
-        <input type="text" id="eventTitle" placeholder="Título (Causa o Circunstancia)">
-        <textarea id="eventDesc" rows="4" placeholder="Escribe aquí los motivos, impacto económico y estado mental..."></textarea>
-        <button class="btn btn-add" onclick="addEvent()">Registrar en la Línea de Tiempo</button>
+        <input type="text" id="eventTitle" placeholder="Título del Hito">
+        <textarea id="eventDesc" rows="4" placeholder="Causas, efectos psicológicos y detalles económicos..."></textarea>
+        <button class="btn btn-add" onclick="addEvent()">Guardar Hito</button>
     </div>
 
     <div class="timeline" id="timelineContainer"></div>
 
     <script>
-        // BASE DE DATOS COMPLETA E INTEGRADA
-        let events = [
-            { id: 1, date: "14 Enero 2024", title: "El Detonante Moral", desc: "Choque vehicular. No es solo económico; es un quiebre moral que genera la urgencia de redención personal y necesidad de reparación inmediata." },
-            { id: 2, date: "Enero 2024 (Post)", title: "Estructura de Riesgo", desc: "Manejo de dinero delegado en Astrid Mouchet Agurto. Dependencia total de su gestión sin comprobantes físicos claros." },
-            { id: 3, date: "Febrero - Mayo 2024", title: "Sobreexigencia Mental", desc: "Flujos de hasta $60M. A pesar del volumen, la meta se percibe lejana, instalando la mentalidad de 'acelerar a cualquier costo'." },
-            { id: 4, date: "Junio 2024", title: "Cambio de Paradigma (Crédito)", desc: "Solicitud de crédito. La presión cambia: ya no es generar riqueza, sino la obligación de responder por capital ajeno." },
-            { id: 5, date: "Agosto - Septiembre 2024", title: "Reorientación Emocional", desc: "Inicio de relación sentimental. El foco se desplaza al vínculo, pausando la resolución de deudas y agravando el riesgo futuro." },
-            { id: 6, date: "Octubre 2024", title: "Pérdida de Estructura", desc: "Abandono de universidad. Presiones del entorno por notar capacidad económica, generando aislamiento y tensiones externas." },
-            { id: 7, date: "Noviembre 2024 (Pre-Crisis)", title: "Factores de Estrés Críticos", desc: "Posibilidad de paternidad multiplica responsabilidad. Inseguridad por terceros en entorno de pareja causa sobrepensamiento extremo." },
-            { id: 8, date: "Noviembre 2024 (Núcleo)", title: "Catástrofe Financiera", desc: "Retención de $6.000.000. Cobro unilateral de bienes por expareja. Frustración deriva en pérdida total de los fondos restantes." },
-            { id: 9, date: "Diciembre 2024", title: "Saturación Total", desc: "Pérdida adicional de $2.1M (motos). Ruptura definitiva y conflictos familiares severos. Colapso de la lógica estratégica." },
-            { id: 10, date: "Enero - Mayo 2025", title: "Quiebre de Salud", desc: "Internación clínica de 5 meses tras intento de suicidio. Consecuencia de un año de presión insostenible y traición percibida." },
-            { id: 11, date: "Septiembre 2025", title: "Demostración Técnica", desc: "Generación de $15M tras recuperación. Confirma habilidad técnica intacta, pero revela falla en gestión post-ingreso y control de gasto." },
-            { id: 12, date: "Año 2026", title: "Diagnóstico Actual", desc: "Falla de nuevos sistemas por desgaste emocional residual. Persiste la sensación de doble pérdida (dinero y objeto de intercambio)." }
+        // DATOS INICIALES DETALLADOS
+        const defaultEvents = [
+            { id: 1, date: "Enero 2024", title: "Quiebre Moral y Redención", desc: "El choque vehicular actúa como un catalizador moral. La urgencia económica nace del sentimiento de 'limpiar' el error personal, no solo de la deuda." },
+            { id: 2, date: "Febrero - Mayo 2024", title: "Brecha de Percepción", desc: "A pesar de flujos de $60M, la meta se siente lejana. Se instala la mentalidad de 'acelerar a cualquier costo', raíz de las decisiones de alto riesgo." },
+            { id: 3, date: "Junio 2024", title: "Carga del Capital Ajeno", desc: "El crédito bancario reduce el margen de error psicológico. Pasa de generar con lo propio a la asfixia de responder por capital externo." },
+            { id: 4, date: "Octubre 2024", title: "Colapso del Entorno", desc: "Presiones negativas del círculo cercano ante tu capacidad de generación. Deriva en aislamiento y abandono de estudios." },
+            { id: 5, date: "Noviembre 2024", title: "Crisis Multidimensional", desc: "Estrés masivo por posible paternidad + Inseguridad emocional por terceros en entorno de pareja. Detona el sobrepensamiento financiero." },
+            { id: 6, date: "Diciembre 2024", title: "Saturación Final ($2.1M)", desc: "Pérdida por motos sumada a los $6M retenidos. Estado de colapso absoluto del sistema de procesamiento mental." },
+            { id: 7, date: "Enero - Mayo 2025", title: "Internación Clínica", desc: "5 meses de internación. Consecuencia directa del trauma por traición percibida y la presión sostenida durante un año." },
+            { id: 8, date: "Septiembre - Diciembre 2025", title: "Habilidad vs Gestión", desc: "Generación de $15M exitosa, pero pérdida posterior por desorden en viajes. El problema es el control emocional del gasto, no la técnica." },
+            { id: 9, date: "Año 2026", title: "Sombra de la Doble Pérdida", desc: "Fallo de nuevos sistemas por desgaste residual. La falta de devolución del objeto e intercambio impide un enfoque limpio." }
         ];
+
+        // Cargar desde LocalStorage o usar los por defecto
+        let events = JSON.parse(localStorage.getItem('timelineData')) || defaultEvents;
+
+        function saveToLocal() {
+            localStorage.setItem('timelineData', JSON.stringify(events));
+        }
 
         function renderTimeline() {
             const container = document.getElementById('timelineContainer');
             container.innerHTML = '';
-
             events.forEach((event, index) => {
                 const side = index % 2 === 0 ? 'left' : 'right';
-                const html = `
-                    <div class="container ${side}" id="event-${event.id}">
+                container.innerHTML += `
+                    <div class="container ${side}">
                         <div class="content">
                             <span class="date-display">${event.date}</span>
                             <h4 style="margin:5px 0; color:var(--accent)">${event.title}</h4>
                             <div class="text-display">${event.desc}</div>
                             <div class="actions">
-                                <button class="btn btn-edit" onclick="editEvent(${event.id})">Editar Texto</button>
-                                <button class="btn btn-delete" onclick="deleteEvent(${event.id})">Eliminar</button>
+                                <button class="btn btn-edit" onclick="editEvent(${event.id})">Editar</button>
+                                <button class="btn btn-delete" onclick="deleteEvent(${event.id})">Borrar</button>
                             </div>
                         </div>
-                    </div>
-                `;
-                container.innerHTML += html;
+                    </div>`;
             });
         }
 
@@ -180,30 +139,30 @@
             const date = document.getElementById('eventDate').value;
             const title = document.getElementById('eventTitle').value;
             const desc = document.getElementById('eventDesc').value;
-
             if(date && title && desc) {
                 events.push({ id: Date.now(), date, title, desc });
+                saveToLocal();
                 renderTimeline();
                 document.getElementById('eventDate').value = '';
                 document.getElementById('eventTitle').value = '';
                 document.getElementById('eventDesc').value = '';
-            } else {
-                alert("Por favor, rellena todos los campos para agregar el hito.");
-            }
-        }
-
-        function deleteEvent(id) {
-            if(confirm("¿Seguro que deseas eliminar esta información del mapa?")) {
-                events = events.filter(e => e.id !== id);
-                renderTimeline();
             }
         }
 
         function editEvent(id) {
             const event = events.find(e => e.id === id);
-            const newDesc = prompt("Modificar descripción analítica:", event.desc);
-            if(newDesc !== null && newDesc.trim() !== "") {
+            const newDesc = prompt("Modificar descripción:", event.desc);
+            if(newDesc) {
                 event.desc = newDesc;
+                saveToLocal();
+                renderTimeline();
+            }
+        }
+
+        function deleteEvent(id) {
+            if(confirm("¿Eliminar este hito definitivamente?")) {
+                events = events.filter(e => e.id !== id);
+                saveToLocal();
                 renderTimeline();
             }
         }
