@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Línea de Tiempo Interactiva - Gestión Integral</title>
+    <title>Línea de Tiempo Interactiva - Sebastián Muñoz</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -12,56 +12,64 @@
             --text: #e2e8f0;
             --danger: #f87171;
             --accent: #fbbf24;
+            --success: #10b981;
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--bg-color);
             color: var(--text);
             margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
 
-        h1 { text-align: center; color: var(--primary); text-transform: uppercase; }
+        h1 { text-align: center; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
 
         /* Formulario de entrada */
         .admin-controls {
-            max-width: 800px;
+            max-width: 900px;
             margin: 20px auto;
             background: var(--card-bg);
-            padding: 20px;
+            padding: 25px;
             border-radius: 12px;
             border: 1px solid var(--primary);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
         }
+
+        .admin-controls h3 { margin-top: 0; color: var(--primary); }
 
         .admin-controls input, .admin-controls textarea {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 8px 0;
             border-radius: 6px;
             border: 1px solid #334155;
             background: #0f172a;
             color: white;
             box-sizing: border-box;
+            font-size: 1rem;
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            transition: 0.3s;
         }
 
-        .btn-add { background: var(--primary); color: #0f172a; }
+        .btn-add { background: var(--primary); color: #0f172a; width: 100%; margin-top: 10px; }
+        .btn-add:hover { background: #7dd3fc; }
         .btn-edit { background: var(--accent); color: #0f172a; margin-right: 5px; }
         .btn-delete { background: var(--danger); color: white; }
 
         /* Estructura Línea de Tiempo */
         .timeline {
             position: relative;
-            max-width: 1000px;
-            margin: 40px auto;
+            max-width: 1100px;
+            margin: 50px auto;
         }
 
         .timeline::after {
@@ -80,50 +88,69 @@
             box-sizing: border-box;
         }
 
-        .left { left: 0; text-align: right; }
-        .right { left: 50%; text-align: left; }
+        .left { left: 0; }
+        .right { left: 50%; }
 
-        .content {
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            border-top: 4px solid var(--primary);
-            position: relative;
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 24px; height: 24px;
+            right: -12px; background: var(--primary);
+            border: 4px solid var(--bg-color);
+            top: 30px; border-radius: 50%; z-index: 1;
         }
 
-        .date-display { font-weight: bold; color: var(--primary); font-size: 1.1rem; }
-        .text-display { margin: 10px 0; display: block; }
+        .right::after { left: -12px; }
 
-        .actions { margin-top: 15px; }
+        .content {
+            padding: 25px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border-top: 5px solid var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        .date-display { font-weight: bold; color: var(--primary); font-size: 1.1rem; display: block; margin-bottom: 10px; }
+        .text-display { font-size: 0.95rem; color: #cbd5e1; }
+        .actions { margin-top: 20px; border-top: 1px solid #334155; padding-top: 15px; }
 
         @media (max-width: 768px) {
             .timeline::after { left: 31px; }
-            .container { width: 100%; padding-left: 70px; text-align: left !important; }
-            .right { left: 0; }
+            .container { width: 100%; padding-left: 70px; padding-right: 25px; left: 0 !important; }
+            .container::after { left: 19px; }
+            .right::after { left: 19px; }
         }
     </style>
 </head>
 <body>
 
-    <h1>📍 Gestión de Línea de Tiempo Integral</h1>
+    <h1>📍 Gestión Integral de Trayectoria</h1>
 
     <div class="admin-controls">
-        <h3>Agregar Nuevo Evento</h3>
-        <input type="text" id="eventDate" placeholder="Fecha (ej: 14 Enero 2024)">
-        <input type="text" id="eventTitle" placeholder="Título del Evento">
-        <textarea id="eventDesc" rows="3" placeholder="Descripción detallada, causas y consecuencias"></textarea>
-        <button class="btn btn-add" onclick="addEvent()">Agregar a la Cronología</button>
+        <h3>Agregar Nuevo Hito Analítico</h3>
+        <input type="text" id="eventDate" placeholder="Mes y Año (ej: Junio 2024)">
+        <input type="text" id="eventTitle" placeholder="Título (Causa o Circunstancia)">
+        <textarea id="eventDesc" rows="4" placeholder="Escribe aquí los motivos, impacto económico y estado mental..."></textarea>
+        <button class="btn btn-add" onclick="addEvent()">Registrar en la Línea de Tiempo</button>
     </div>
 
-    <div class="timeline" id="timelineContainer">
-        </div>
+    <div class="timeline" id="timelineContainer"></div>
 
     <script>
-        [span_2](start_span)[span_3](start_span)[span_4](start_span)// Datos iniciales basados en el caso[span_2](end_span)[span_3](end_span)[span_4](end_span)
+        // BASE DE DATOS COMPLETA E INTEGRADA
         let events = [
-            { id: 1, date: "14 Enero 2024", title: "El Detonante", desc: "Choque vehicular que genera deuda con tercero e impacto de responsabilidad inmediata." },
-            { id: 2, date: "Enero 2024 (Post)", title: "Estructura de Riesgo", desc: "Inicio de flujos a través de cuenta de terceros sin comprobantes claros." },
-            { id: 3, date: "Noviembre 2024", title: "Retención de Capital", desc: "Confirmación de $6.000.000 retenidos y quiebre de confianza." }
+            { id: 1, date: "14 Enero 2024", title: "El Detonante Moral", desc: "Choque vehicular. No es solo económico; es un quiebre moral que genera la urgencia de redención personal y necesidad de reparación inmediata." },
+            { id: 2, date: "Enero 2024 (Post)", title: "Estructura de Riesgo", desc: "Manejo de dinero delegado en Astrid Mouchet Agurto. Dependencia total de su gestión sin comprobantes físicos claros." },
+            { id: 3, date: "Febrero - Mayo 2024", title: "Sobreexigencia Mental", desc: "Flujos de hasta $60M. A pesar del volumen, la meta se percibe lejana, instalando la mentalidad de 'acelerar a cualquier costo'." },
+            { id: 4, date: "Junio 2024", title: "Cambio de Paradigma (Crédito)", desc: "Solicitud de crédito. La presión cambia: ya no es generar riqueza, sino la obligación de responder por capital ajeno." },
+            { id: 5, date: "Agosto - Septiembre 2024", title: "Reorientación Emocional", desc: "Inicio de relación sentimental. El foco se desplaza al vínculo, pausando la resolución de deudas y agravando el riesgo futuro." },
+            { id: 6, date: "Octubre 2024", title: "Pérdida de Estructura", desc: "Abandono de universidad. Presiones del entorno por notar capacidad económica, generando aislamiento y tensiones externas." },
+            { id: 7, date: "Noviembre 2024 (Pre-Crisis)", title: "Factores de Estrés Críticos", desc: "Posibilidad de paternidad multiplica responsabilidad. Inseguridad por terceros en entorno de pareja causa sobrepensamiento extremo." },
+            { id: 8, date: "Noviembre 2024 (Núcleo)", title: "Catástrofe Financiera", desc: "Retención de $6.000.000. Cobro unilateral de bienes por expareja. Frustración deriva en pérdida total de los fondos restantes." },
+            { id: 9, date: "Diciembre 2024", title: "Saturación Total", desc: "Pérdida adicional de $2.1M (motos). Ruptura definitiva y conflictos familiares severos. Colapso de la lógica estratégica." },
+            { id: 10, date: "Enero - Mayo 2025", title: "Quiebre de Salud", desc: "Internación clínica de 5 meses tras intento de suicidio. Consecuencia de un año de presión insostenible y traición percibida." },
+            { id: 11, date: "Septiembre 2025", title: "Demostración Técnica", desc: "Generación de $15M tras recuperación. Confirma habilidad técnica intacta, pero revela falla en gestión post-ingreso y control de gasto." },
+            { id: 12, date: "Año 2026", title: "Diagnóstico Actual", desc: "Falla de nuevos sistemas por desgaste emocional residual. Persiste la sensación de doble pérdida (dinero y objeto de intercambio)." }
         ];
 
         function renderTimeline() {
@@ -137,10 +164,10 @@
                         <div class="content">
                             <span class="date-display">${event.date}</span>
                             <h4 style="margin:5px 0; color:var(--accent)">${event.title}</h4>
-                            <span class="text-display">${event.desc}</span>
+                            <div class="text-display">${event.desc}</div>
                             <div class="actions">
-                                <button class="btn btn-edit" onclick="editEvent(${event.id})">Editar</button>
-                                <button class="btn btn-delete" onclick="deleteEvent(${event.id})">Borrar</button>
+                                <button class="btn btn-edit" onclick="editEvent(${event.id})">Editar Texto</button>
+                                <button class="btn btn-delete" onclick="deleteEvent(${event.id})">Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -155,25 +182,18 @@
             const desc = document.getElementById('eventDesc').value;
 
             if(date && title && desc) {
-                const newEvent = {
-                    id: Date.now(),
-                    date,
-                    title,
-                    desc
-                };
-                events.push(newEvent);
+                events.push({ id: Date.now(), date, title, desc });
                 renderTimeline();
-                // Limpiar campos
                 document.getElementById('eventDate').value = '';
                 document.getElementById('eventTitle').value = '';
                 document.getElementById('eventDesc').value = '';
             } else {
-                alert("Por favor completa todos los campos.");
+                alert("Por favor, rellena todos los campos para agregar el hito.");
             }
         }
 
         function deleteEvent(id) {
-            if(confirm("¿Estás seguro de borrar este hito?")) {
+            if(confirm("¿Seguro que deseas eliminar esta información del mapa?")) {
                 events = events.filter(e => e.id !== id);
                 renderTimeline();
             }
@@ -181,14 +201,13 @@
 
         function editEvent(id) {
             const event = events.find(e => e.id === id);
-            const newDesc = prompt("Editar descripción:", event.desc);
-            if(newDesc !== null) {
+            const newDesc = prompt("Modificar descripción analítica:", event.desc);
+            if(newDesc !== null && newDesc.trim() !== "") {
                 event.desc = newDesc;
                 renderTimeline();
             }
         }
 
-        // Carga inicial
         renderTimeline();
     </script>
 </body>
